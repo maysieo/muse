@@ -11,8 +11,9 @@ function getSearchValue (e) {
   }
 
 function sendSearchValue () {
-  axios.get(`/?=${searchArtist}`)
+  axios.get(`/artist`)
     .then((response) => {
+      console.log(response);
       setArtwork(response);
     })
     .catch((error) => {
@@ -23,7 +24,7 @@ function sendSearchValue () {
   return (
     <div>
       <input type="text" placeholder="Find artists to follow" onChange={(e) => getSearchValue(e)} />
-      <button>Search</button>
+      <button onClick={sendSearchValue}>Search</button>
     </div>
   )
 }
