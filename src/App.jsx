@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import './App.css'
+import Search from './components/Search.jsx'
 
 function App() {
 
@@ -8,6 +8,7 @@ function App() {
       <h1>
         muse
       </h1>
+      <Search />
     </>
   )
 }
