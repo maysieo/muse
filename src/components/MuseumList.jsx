@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import ArtworkCard from './ArtworkCard';
 
-function MuseumList({ metWork, momaWork, whitneyWork }) {
+function MuseumList({ metWork, momaWork, whitneyWork, getCurrentArtwork }) {
 
   return (
     <div>
@@ -9,7 +9,7 @@ function MuseumList({ metWork, momaWork, whitneyWork }) {
       <div className="container mx-auto flex flex-wrap">
       {metWork.map((art) => {
         return (
-          <ArtworkCard key={art.id} art={art}/>
+          <ArtworkCard key={art.id} art={art} getCurrentArtwork={getCurrentArtwork}/>
         )
       })}
       </div>
@@ -18,7 +18,7 @@ function MuseumList({ metWork, momaWork, whitneyWork }) {
       <div className="container mx-auto flex flex-wrap">
       {momaWork.map((art) => {
         return (
-          <ArtworkCard key={art.id} art={art}/>
+          <ArtworkCard key={art.id} art={art} getCurrentArtwork={getCurrentArtwork}/>
         )
       })}
       </div>
@@ -27,7 +27,7 @@ function MuseumList({ metWork, momaWork, whitneyWork }) {
         <div className="container mx-auto flex flex-wrap">
         {whitneyWork.map((art) => {
           return (
-            <ArtworkCard key={art.id} art={art}/>
+            <ArtworkCard key={art.id} art={art} getCurrentArtwork={getCurrentArtwork}/>
           )
         })}
         </div>

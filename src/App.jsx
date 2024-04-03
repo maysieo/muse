@@ -1,6 +1,7 @@
 import './App.css'
 import Search from './components/Search.jsx'
 import MuseumList from './components/MuseumList.jsx'
+import ArtworkPage from './components/ArtworkPage.jsx'
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -12,10 +13,17 @@ const [metWork, setMetWork] = useState([]);
 const [momaWork, setMomaWork] = useState([]);
 const [whitneyWork, setWhitneyWork] = useState([]);
 const [searchingDisplay, setSearchingDisplay] = useState(false);
+const [artworkPage, setArtworkPage] = useState(false);
+const [currentArtwork, setCurrentArtwork] = useState({});
 
 
 function getSearchValue (e) {
   setSearchArtist(e.target.value)
+}
+
+function getCurrentArtwork (thisPiece) {
+  console.log(thisPiece);
+  setCurrentArtwork(thisPiece);
 }
 
 function sendSearchValue () {
@@ -38,12 +46,14 @@ function sendSearchValue () {
 
   return (
     <>
-      <h1>
+      <h1 className="text-4XL">
         muse
       </h1>
+      <ArtworkPage currentArtwork={currentArtwork}/>
+
       <Search getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist}/>
       {searchingDisplay ? <h2>{searchArtist} appears at...</h2> : null}
-      <MuseumList metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork}/>
+      <MuseumList metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} />
     </>
   )
 }
