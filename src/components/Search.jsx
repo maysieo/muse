@@ -11,10 +11,10 @@ function getSearchValue (e) {
   }
 
 function sendSearchValue () {
-  axios.get(`/artist`)
+  axios.get(`http://localhost:3000/artist?artist=${searchArtist}`)
     .then((response) => {
-      console.log(response);
-      setArtwork(response);
+      console.log(response.data);
+      setArtwork(response.data);
     })
     .catch((error) => {
       console.log(error);
