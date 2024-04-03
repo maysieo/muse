@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import db from '../db.js';
 
-const artworkSchema = mongoose.Schema({
+const artworkSchema = new mongoose.Schema({
   object_id: Number,
   artist: String,
   title: String,
@@ -10,8 +11,8 @@ const artworkSchema = mongoose.Schema({
   url: String,
   department: String,
   gallery: Number,
-})
+}, {collection: 'artwork'})
 
-const artwork = mongoose.model('Artwork', artworkSchema);
+const Artwork = mongoose.model('artwork', artworkSchema);
 
-export default artwork; 
+export default Artwork;

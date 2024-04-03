@@ -1,34 +1,15 @@
-import { useState } from 'react';
-import axios from 'axios';
+/* eslint-disable react/prop-types */
 
-function Search() {
 
-const [searchArtist, setSearchArtist] = useState('');
-const [artwork, setArtwork] = useState([]);
+function Search({ getSearchValue, sendSearchValue, searchArtist, searchingDisplay }) {
 
-function getSearchValue (e) {
-    setSearchArtist(e.target.value)
-  }
-
-function sendSearchValue () {
-  axios.get('http://localhost:3000/artist', {
-    params: {
-      name: searchArtist
-    }
-  })
-    .then((response) => {
-      console.log(response.data);
-      setArtwork(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-}
 
   return (
     <div>
       <input type="text" placeholder="Find artists to follow" onChange={(e) => getSearchValue(e)} />
       <button onClick={sendSearchValue}>Search</button>
+      {searchingDisplay ? <h2>{searchArtist} appears at...</h2> : null}
+
     </div>
   )
 }
