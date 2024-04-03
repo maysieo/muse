@@ -9,7 +9,6 @@ function Search({ getSearchValue, sendSearchValue, searchArtist, searchingDispla
       <input type="text" placeholder="Find artists to follow" onChange={(e) => getSearchValue(e)} />
       <button onClick={sendSearchValue}>Search</button>
       {searchingDisplay ? <h2>{searchArtist} appears at...</h2> : null}
-
     </div>
   )
 }
