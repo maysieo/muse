@@ -5,7 +5,7 @@ function MuseumList({ metWork, momaWork, whitneyWork }) {
 
   return (
     <div>
-      {(metWork.length > 0) ? <h2>The Met</h2> : null}
+      {(metWork.length > 0) ? <><h2>The Met</h2> <div className="h-1 bg-yellow-200"></div></> : null}
       <div className="container mx-auto flex flex-wrap">
       {metWork.map((art) => {
         return (
@@ -14,7 +14,7 @@ function MuseumList({ metWork, momaWork, whitneyWork }) {
       })}
       </div>
 
-      {(momaWork.length > 0) ? <h2>Museum of Modern Art</h2> : null}
+      {(momaWork.length > 0) ? <><h2>Museum of Modern Art</h2> <div className="h-1 bg-yellow-200"></div> </>: null}
       <div className="container mx-auto flex flex-wrap">
       {momaWork.map((art) => {
         return (
@@ -23,7 +23,7 @@ function MuseumList({ metWork, momaWork, whitneyWork }) {
       })}
       </div>
 
-       {(whitneyWork.length > 0) ? <h2>Whitney Museum of American Art</h2> : null}
+       {(whitneyWork.length > 0) ? <><h2>Whitney Museum of American Art</h2> <div className="h-1 bg-yellow-200"></div></>: null}
         <div className="container mx-auto flex flex-wrap">
         {whitneyWork.map((art) => {
           return (
