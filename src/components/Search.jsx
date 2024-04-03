@@ -11,7 +11,11 @@ function getSearchValue (e) {
   }
 
 function sendSearchValue () {
-  axios.get(`http://localhost:3000/artist?artist=${searchArtist}`)
+  axios.get('http://localhost:3000/artist', {
+    params: {
+      name: searchArtist
+    }
+  })
     .then((response) => {
       console.log(response.data);
       setArtwork(response.data);

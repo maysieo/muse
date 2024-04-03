@@ -14,8 +14,8 @@ app.use(express.json());
 
 const port = 3000;
 
-app.get('/artist', (req, res) => {
-  console.log(req.params)
+app.get('/artist/', (req, res) => {
+  console.log(req.query)
   res.status(200).send('Hello, World!')
 });
 
