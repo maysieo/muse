@@ -10,7 +10,9 @@ function App() {
   const [searchArtist, setSearchArtist] = useState('');
   const [artwork, setArtwork] = useState([]);
   const [metWork, setMetWork] = useState([]);
+  const [metWorkNoPics, setMetWorkNoPics] = useState([]);
   const [momaWork, setMomaWork] = useState([]);
+  const [momaWorkNoPics, setMomaWorkNoPics] = useState([]);
   const [whitneyWork, setWhitneyWork] = useState([]);
   const [searchingDisplay, setSearchingDisplay] = useState(false);
   const [artworkPage, setArtworkPage] = useState(false);
@@ -34,8 +36,10 @@ function App() {
     })
     .then((response) => {
       setArtwork(response.data);
-      setMetWork(response.data.filter((art) => art.Repository === 'Metropolitan Museum of Art, New York, NY'));
-      setMomaWork(response.data.filter((art) => art.Repository === 'Museum of Modern Art'));
+      setMetWork(response.data.filter((art) => art.Repository === 'Metropolitan Museum of Art, New York, NY' && art.ImageURL));
+      setMetWorkNoPics(response.data.filter((art) => art.Repository === 'Metropolitan Museum of Art, New York, NY' && (!art.ImageURL) || art.ImageURL === ''));
+      setMomaWork(response.data.filter((art) => art.Repository === 'Museum of Modern Art' && art.ImageURL));
+      setMomaWorkNoPics(response.data.filter((art) => art.Repository === 'Museum of Modern Art' && !art.ImageURL));
       setWhitneyWork(response.data.filter((art) => art.Repository === 'Whitney Museum of American Art'));
     })
     .catch((error) => {
@@ -51,7 +55,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/artwork" element={<ArtworkPage currentArtwork={currentArtwork} />} />
-          <Route path="/" element={<HomePage getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} searchingDisplay={searchingDisplay} metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork}/>} />
+          <Route path="/" element={<HomePage getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} searchingDisplay={searchingDisplay} metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} momaWorkNoPics={momaWorkNoPics} metWorkNoPics={metWorkNoPics} />} />
         </Routes>
       </Router>
     </>
