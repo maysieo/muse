@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import ReviewsBar from './ReviewsBar';
 
 Modal.setAppElement('#root'); // This line is needed for accessibility reasons
 
@@ -9,6 +10,7 @@ const LogIn = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [serverMessage, setServerMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const createAccount = () => {
     if (!userEmail || !userPassword) {
@@ -25,6 +27,9 @@ const LogIn = () => {
     })
     .then((response) => {
       setServerMessage(response.data);
+      if (response.data === "Account created") {
+        setIsLoggedIn(true);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -46,8 +51,10 @@ const LogIn = () => {
       password: userPassword
     })
     .then((response) => {
-      console.log(response)
       setServerMessage(response.data);
+      if (response.data === "Logged in") {
+        setIsLoggedIn(true);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -64,37 +71,42 @@ const LogIn = () => {
 
   return (
     <div className="fixed top-0 right-0">
-      <button className="bg-custom-blue text-white px-4 py-2 rounded" onClick={() => setIsModalOpen(true)}>
-        Log In
-      </button>
+      {isLoggedIn ? <ReviewsBar /> :
 
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        contentLabel="Log In"
-        className="absolute top-0 right-0 w-80 p-4 bg-white rounded shadow-lg"
-      >
-        <h2 className="text-lg font-bold mb-4 text-custom-blue">Log In</h2>
+      <div>
+        <button className="bg-custom-blue text-white px-4 py-2 rounded" onClick={() => setIsModalOpen(true)}>
+          Log In
+        </button>
 
-        <form>
-          <label className="block mb-2">
-            <input className="w-full px-2 py-1 border rounded" type="email" placeholder="Email" onChange={(e) => grabEmail(e)} required/>
-          </label>
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          contentLabel="Log In"
+          className="absolute top-0 right-0 w-80 p-4 bg-white rounded shadow-lg"
+        >
+          <h2 className="text-lg font-bold mb-4 text-custom-blue">Log In</h2>
 
-          <label className="block mb-4">
-            <input className="w-full px-2 py-1 border rounded" type="password" placeholder="Password" onChange={(e) => grabPassword(e)} required/>
-          </label>
+          <form>
+            <label className="block mb-2">
+              <input className="w-full px-2 py-1 border rounded" type="email" placeholder="Email" onChange={(e) => grabEmail(e)} required/>
+            </label>
 
-          <button className="w-full bg-custom-blue text-white px-4 py-2 rounded mb-2" type="submit" onClick={(e) => logIn(e)}>
-            Log In
-          </button>
+            <label className="block mb-4">
+              <input className="w-full px-2 py-1 border rounded" type="password" placeholder="Password" onChange={(e) => grabPassword(e)} required/>
+            </label>
 
-          <button className="w-full bg-custom-yellow text-custom-blue px-4 py-2 rounded" type="button" onClick={createAccount}>
-            Create Account
-          </button>
-          <p className="text-custom-blue text-sm mt-2">{serverMessage}</p>
-        </form>
-      </Modal>
+            <button className="w-full bg-custom-blue text-white px-4 py-2 rounded mb-2" type="submit" onClick={(e) => logIn(e)}>
+              Log In
+            </button>
+
+            <button className="w-full bg-custom-yellow text-custom-blue px-4 py-2 rounded" type="button" onClick={createAccount}>
+              Create Account
+            </button>
+            <p className="text-custom-blue text-sm mt-2">{serverMessage}</p>
+          </form>
+        </Modal>
+      </div>
+      }
     </div>
   );
 }

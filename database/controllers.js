@@ -42,7 +42,6 @@ export const logIn = (email, password) => {
   return new Promise((resolve, reject) => {
     db.collection('userData').findOne({ email: email, password: password })
       .then((user) => {
-        console.log('here is user', user)
         if (user) {
           resolve('Logged in');
         } else {

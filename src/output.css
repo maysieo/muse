@@ -677,6 +677,10 @@ video {
   flex-wrap: wrap;
 }
 
+.items-center {
+  align-items: center;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -692,6 +696,11 @@ video {
 .border-custom-yellow {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 0 / var(--tw-border-opacity));
+}
+
+.border-custom-red {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 0 0 / var(--tw-border-opacity));
 }
 
 .bg-custom-blue {
@@ -722,6 +731,11 @@ video {
 .bg-custom-red {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .object-cover {
@@ -767,6 +781,22 @@ video {
 
 .pb-2 {
   padding-bottom: 0.5rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.pt-7 {
+  padding-top: 1.75rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
 }
 
 .text-left {
@@ -912,5 +942,20 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.hover\:border-custom-yellow:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 0 / var(--tw-border-opacity));
+}
+
+.hover\:border-custom-red:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 0 0 / var(--tw-border-opacity));
+}
+
+.hover\:bg-blue-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 

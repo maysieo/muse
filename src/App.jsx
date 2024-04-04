@@ -54,7 +54,7 @@ function App() {
       <LogIn />
       </div>
       <div>
-        <h1 className="text-4XL pb-6">
+        <h1 className="text-4XL pb-6 pt-5">
           muse
         </h1>
         <Router>
