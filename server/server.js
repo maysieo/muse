@@ -2,9 +2,7 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
-import db from '../database/db.js';
 import { findArtist, getImages, createAccount, logIn } from '../database/controllers.js';
-import axios from 'axios';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -59,6 +57,11 @@ app.get('/images', (req, res) => {
 
 app.post('/createAccount', (req, res) => {
   const { email, password } = req.body;
+  if (!password) {
+    return res.status(400).send('Password is required')
+  } else if (!email || !email.includes('@')) {
+    return res.status(400).send('Valid email is required')
+  } else {
   createAccount(email, password)
     .then((response) => {
       res.status(201).send(response);
@@ -66,10 +69,17 @@ app.post('/createAccount', (req, res) => {
     .catch((error) => {
       res.status(400).send(error);
     })
+  }
 });
 
 app.post('/logIn', (req, res) => {
   const { email, password } = req.body;
+  if (!password) {
+    return res.status(400).send('Password is required')
+  }
+  if (!email || !email.includes('@')) {
+    return res.status(400).send('Valid email is required')
+  }
   logIn(email, password)
     .then((response) => {
       res.status(200).send(response);

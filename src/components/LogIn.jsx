@@ -11,6 +11,14 @@ const LogIn = () => {
   const [serverMessage, setServerMessage] = useState('');
 
   const createAccount = () => {
+    if (!userEmail || !userPassword) {
+      setServerMessage('Please enter an email and password');
+      return;
+    }
+    if (!userEmail.includes('@')) {
+      setServerMessage('Please enter a valid email');
+      return;
+    }
     axios.post('http://localhost:3000/createAccount', {
       email: userEmail,
       password: userPassword
@@ -25,6 +33,14 @@ const LogIn = () => {
 
   const logIn = (e) => {
     e.preventDefault();
+    if (!userEmail || !userPassword) {
+      setServerMessage('Please enter an email and password');
+      return;
+    }
+    if (!userEmail.includes('@')) {
+      setServerMessage('Please enter a valid email');
+      return;
+    }
     axios.post('http://localhost:3000/logIn', {
       email: userEmail,
       password: userPassword
@@ -62,11 +78,11 @@ const LogIn = () => {
 
         <form>
           <label className="block mb-2">
-            <input className="w-full px-2 py-1 border rounded" type="email" placeholder="Email" onChange={(e) => grabEmail(e)}/>
+            <input className="w-full px-2 py-1 border rounded" type="email" placeholder="Email" onChange={(e) => grabEmail(e)} required/>
           </label>
 
           <label className="block mb-4">
-            <input className="w-full px-2 py-1 border rounded" type="password" placeholder="Password" onChange={(e) => grabPassword(e)}/>
+            <input className="w-full px-2 py-1 border rounded" type="password" placeholder="Password" onChange={(e) => grabPassword(e)} required/>
           </label>
 
           <button className="w-full bg-custom-blue text-white px-4 py-2 rounded mb-2" type="submit" onClick={(e) => logIn(e)}>
