@@ -3,7 +3,7 @@ import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import db from '../database/db.js';
-import findArtist from '../database/controllers.js';
+import { findArtist, getImages } from '../database/controllers.js';
 import axios from 'axios';
 
 const app = express();
@@ -31,7 +31,6 @@ app.get('/artist/', (req, res) => {
             })
             .then(data => {
               art._doc.ImageURL = data.primaryImage;
-              console.log('End result', art);
             })
             .catch(error => {
               console.error('Error:', error);
@@ -47,6 +46,16 @@ app.get('/artist/', (req, res) => {
       res.status(400).send(error);
     });
 });
+
+app.get('/images', (req, res) => {
+  getImages()
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    })
+})
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
