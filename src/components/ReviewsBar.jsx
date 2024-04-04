@@ -17,10 +17,10 @@ const ReviewsBar = () => {
     <div>
     {showReviewModal ? <WriteReviewModal closeModal={closeModal}/> :
       <div>
-        <button className="bg-custom-blue text-white px-4 py-2 rounded hover:border-custom-red">
+        <button className="bg-custom-blue text-white px-4 py-2 rounded hover:border-custom-red mr-2">
           Personal Catalog
         </button>
-        <button className="bg-custom-blue text-white px-4 py-2 rounded hover:border-custom-red" onClick={openModal}>
+        <button className="bg-custom-blue text-white px-4 py-2 rounded hover:border-custom-red mr-4" onClick={openModal}>
           Write Review
         </button>
       </div>
