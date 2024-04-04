@@ -17,16 +17,15 @@ function App() {
   const [currentArtwork, setCurrentArtwork] = useState({});
 
 
-  function getSearchValue (e) {
+  const getSearchValue = (e) => {
     setSearchArtist(e.target.value)
   }
 
-  function getCurrentArtwork (thisPiece) {
-    console.log(thisPiece);
+  const getCurrentArtwork = (thisPiece) => {
     setCurrentArtwork(thisPiece);
   }
 
-  function sendSearchValue () {
+  const sendSearchValue = () => {
     setSearchingDisplay(true);
     axios.get('http://localhost:3000/artist', {
       params: {

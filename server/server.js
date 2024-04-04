@@ -4,6 +4,7 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import db from '../database/db.js';
 import findArtist from '../database/controllers.js';
+import axios from 'axios';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -15,17 +16,37 @@ app.use(express.json());
 
 const port = 3000;
 
+
 app.get('/artist/', (req, res) => {
-  console.log('Here is the artists name', req.query.name)
   findArtist(req.query.name)
+    .then((artworks) => {
+      const promises = artworks.map((art) => {
+        const artObject = art.toObject();
+        if (artObject.Repository === 'Metropolitan Museum of Art, New York, NY') {
+          // Replace `metApiUrl` with the actual Met API URL
+          const metApiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObject.ObjectID}`;
+          return fetch(metApiUrl)
+            .then((response) => {
+              return response.json()
+            })
+            .then(data => {
+              art._doc.ImageURL = data.primaryImage;
+              console.log('End result', art);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
+      });
+      return Promise.all(promises).then(() => artworks);
+    })
     .then((data) => {
-      console.log('Here is the data:', data);
       res.status(200).send(data);
     })
     .catch((error) => {
       res.status(400).send(error);
-    })
-  });
+    });
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
