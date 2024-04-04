@@ -1073,6 +1073,16 @@ button:focus-visible {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.focus\:bg-custom-red:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 0 0 / var(--tw-bg-opacity));
+}
+
+.focus\:text-white:focus {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 @media (min-width: 768px) {
   .md\:w-1\/2 {
     width: 50%;

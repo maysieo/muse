@@ -17,8 +17,9 @@ const WriteReviewModal = ({ closeModal }) => {
         </div>
         <textarea className="border p-2 mb-4 w-full h-32" placeholder="Your review" />
         <div>
-          <input className="border p-2 mb-4 w-1/2 float-left" type="number" min="0" max="5" step="0.5" placeholder="Rating (0-5)" />
-          <button className="float-right hover:bg-custom-red hover:text-white"> Add to favorites</button>
+          <input className="border p-2 mb-4 w-1/4 float-left" type="number" min="0" max="5" step="0.5" placeholder="Rating (0-5)" />
+          <button className="focus:bg-custom-red focus:text-white"> Add to favorites</button>
+          <input type="file" accept="image/*" className="border p-2 mb-4 w-1/2 float-right" />
         </div>
         <button className="hover:bg-custom-yellow">Submit</button>
       </div>
