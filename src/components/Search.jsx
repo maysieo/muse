@@ -6,7 +6,7 @@ function Search({ getSearchValue, sendSearchValue, searchArtist, searchingDispla
 
   return (
     <div>
-      <input type="text" placeholder="Find artists to follow" onChange={(e) => getSearchValue(e)} />
+      <input type="text" placeholder="Find artists" onChange={(e) => getSearchValue(e)} />
       <button onClick={sendSearchValue}>Search</button>
       {searchingDisplay ? <h2>{searchArtist} appears in...</h2> : null}
     </div>
