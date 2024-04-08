@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
-const WriteReviewModal = ({ closeModal, getUserReviews }) => {
+const WriteReviewModal = ({ closeModal, getUserReviews, currentArtwork }) => {
   const formRef = useRef();
   const [isFavorite, setIsFavorite] = useState(false);
 

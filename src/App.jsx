@@ -72,12 +72,14 @@ function App() {
     <>
       <Router>
       <div className="w-full">
-      {isLoggedIn ?  <ReviewsBar userReviews={userReviews} getUserCatalog={getUserCatalog}/> : <LogIn isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus}/>}
+      {isLoggedIn ?  <ReviewsBar userReviews={userReviews} getUserCatalog={getUserCatalog} currentArtwork={currentArtwork}/> : <LogIn isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus}/>}
       </div>
       <div>
+        <Link to="/">
         <h1 className="text-4XL pb-6 pt-5">
           muse
         </h1>
+        </Link>
           <Routes>
             <Route path="/artwork" element={<ArtworkPage currentArtwork={currentArtwork} />} />
             <Route path="/" element={<HomePage getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} searchingDisplay={searchingDisplay} metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} momaWorkNoPics={momaWorkNoPics} metWorkNoPics={metWorkNoPics} />} />

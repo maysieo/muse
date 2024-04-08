@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import WriteReviewModal from './WriteReviewModal';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-const ReviewsBar = ({ getUserCatalog }) => {
+const ReviewsBar = ({ getUserCatalog, currentArtwork }) => {
 
   const [showReviewModal, setShowReviewModal] = useState(false);
 
@@ -18,7 +18,7 @@ const ReviewsBar = ({ getUserCatalog }) => {
 
   return (
     <div className="fixed top-0 right-0">
-    {showReviewModal ? <WriteReviewModal closeModal={closeModal} getUserCatalog={getUserCatalog} /> :
+    {showReviewModal ? <WriteReviewModal closeModal={closeModal} getUserCatalog={getUserCatalog} currentArtwork={currentArtwork}/> :
       <div>
         <Link to="/catalog">
           <button className="bg-custom-blue text-white px-4 py-2 rounded hover:border-custom-red mr-2">
