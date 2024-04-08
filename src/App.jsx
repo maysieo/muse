@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import HomePage from './components/HomePage.jsx'
 import ArtworkPage from './components/ArtworkPage.jsx'
 import LogIn from './components/LogIn.jsx'
+import PersonalCatalog from './components/PersonalCatalog.jsx'
+import ReviewsBar from './components/ReviewsBar.jsx'
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -18,6 +20,7 @@ function App() {
   const [searchingDisplay, setSearchingDisplay] = useState(false);
   const [artworkPage, setArtworkPage] = useState(false);
   const [currentArtwork, setCurrentArtwork] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   const getSearchValue = (e) => {
@@ -26,6 +29,10 @@ function App() {
 
   const getCurrentArtwork = (thisPiece) => {
     setCurrentArtwork(thisPiece);
+  }
+
+  const setLoginStatus = () => {
+    setIsLoggedIn(true);
   }
 
   const sendSearchValue = () => {
@@ -50,20 +57,21 @@ function App() {
 
   return (
     <>
+      <Router>
       <div className="w-full">
-      <LogIn />
+      {isLoggedIn ?  <ReviewsBar /> : <LogIn isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus}/>}
       </div>
       <div>
         <h1 className="text-4XL pb-6 pt-5">
           muse
         </h1>
-        <Router>
           <Routes>
             <Route path="/artwork" element={<ArtworkPage currentArtwork={currentArtwork} />} />
             <Route path="/" element={<HomePage getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} searchingDisplay={searchingDisplay} metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} momaWorkNoPics={momaWorkNoPics} metWorkNoPics={metWorkNoPics} />} />
+            <Route path="/catalog" element={<PersonalCatalog />} />
           </Routes>
+        </div>
         </Router>
-      </div>
     </>
   )
 }

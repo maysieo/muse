@@ -67,3 +67,16 @@ export const postReview = (review) => {
       });
   });
 }
+
+export const getUserCatalog = (userEmail) => {
+  return new Promise((resolve, reject) => {
+    db.collection('reviews').find({ userEmail: userEmail }).toArray()
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(error);
+      });
+  });
+}

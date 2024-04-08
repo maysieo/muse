@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
-import { findArtist, getImages, createAccount, logIn, postReview } from '../database/controllers.js';
+import { findArtist, getImages, createAccount, logIn, postReview, getUserCatalog } from '../database/controllers.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -92,6 +92,16 @@ app.post('/logIn', (req, res) => {
 app.post('/review', (req, res) => {
   postReview(req.body);
   res.status(201).send('Review received');
+})
+
+app.get('/review/:userEmail', (req, res) => {
+  getUserCatalog(req.params.userEmail)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    })
 })
 
 app.listen(port, () => {

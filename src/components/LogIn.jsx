@@ -5,12 +5,12 @@ import ReviewsBar from './ReviewsBar';
 
 Modal.setAppElement('#root'); // This line is needed for accessibility reasons
 
-const LogIn = () => {
+const LogIn = ({ isLoggedIn, setLoginStatus }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [serverMessage, setServerMessage] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   const createAccount = () => {
     if (!userEmail || !userPassword) {
@@ -28,7 +28,7 @@ const LogIn = () => {
     .then((response) => {
       setServerMessage(response.data);
       if (response.data === "Account created") {
-        setIsLoggedIn(true);
+        setLoginStatus();
         localStorage.setItem('userEmail', userEmail);
       }
     })
@@ -54,7 +54,7 @@ const LogIn = () => {
     .then((response) => {
       setServerMessage(response.data);
       if (response.data === "Logged in") {
-        setIsLoggedIn(true);
+        setLoginStatus(true);
         localStorage.setItem('userEmail', userEmail);
       }
     })
