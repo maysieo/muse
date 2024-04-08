@@ -29,6 +29,7 @@ const LogIn = () => {
       setServerMessage(response.data);
       if (response.data === "Account created") {
         setIsLoggedIn(true);
+        localStorage.setItem('userEmail', userEmail);
       }
     })
     .catch((error) => {
@@ -54,6 +55,7 @@ const LogIn = () => {
       setServerMessage(response.data);
       if (response.data === "Logged in") {
         setIsLoggedIn(true);
+        localStorage.setItem('userEmail', userEmail);
       }
     })
     .catch((error) => {

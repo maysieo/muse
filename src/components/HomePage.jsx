@@ -8,7 +8,7 @@ const HomePage = ({ getSearchValue, sendSearchValue, searchArtist, searchingDisp
     <div>
       <Search getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} />
 
-      {searchingDisplay ? <h2 className="pb-6"> {`${searchArtist} appears in...`}</h2> : <LoadingImage />}
+      {searchingDisplay ? <h2 className="pb-6"> {`${searchArtist} appears in...`} </h2> : <LoadingImage />}
 
       <MuseumList metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} metWorkNoPics={metWorkNoPics} momaWorkNoPics={momaWorkNoPics}/>
    </div>

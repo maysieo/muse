@@ -54,3 +54,16 @@ export const logIn = (email, password) => {
       });
   })
 }
+
+export const postReview = (review) => {
+  return new Promise((resolve, reject) => {
+    db.collection('reviews').insertOne(review)
+      .then(() => {
+        resolve('Review posted');
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(error);
+      });
+  });
+}
