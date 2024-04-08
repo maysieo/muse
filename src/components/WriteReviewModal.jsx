@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
-const WriteReviewModal = ({ closeModal }) => {
+const WriteReviewModal = ({ closeModal, getUserReviews }) => {
   const formRef = useRef();
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -32,7 +32,7 @@ const WriteReviewModal = ({ closeModal }) => {
       }
     })
       .then((response) => {
-        console.log(response);
+        getUserReviews();
         closeModal();
       })
       .catch((error) => {

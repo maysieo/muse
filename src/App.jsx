@@ -21,6 +21,8 @@ function App() {
   const [artworkPage, setArtworkPage] = useState(false);
   const [currentArtwork, setCurrentArtwork] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userReviews, setUserReviews] = useState([]);
+
 
 
   const getSearchValue = (e) => {
@@ -33,6 +35,17 @@ function App() {
 
   const setLoginStatus = () => {
     setIsLoggedIn(true);
+  }
+
+  const getUserCatalog = () => {
+    let userEmail = localStorage.getItem('userEmail');
+    axios.get(`http://localhost:3000/review/${userEmail}`)
+      .then((response) => {
+        setUserReviews(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   const sendSearchValue = () => {
@@ -59,7 +72,7 @@ function App() {
     <>
       <Router>
       <div className="w-full">
-      {isLoggedIn ?  <ReviewsBar /> : <LogIn isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus}/>}
+      {isLoggedIn ?  <ReviewsBar userReviews={userReviews} getUserCatalog={getUserCatalog}/> : <LogIn isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus}/>}
       </div>
       <div>
         <h1 className="text-4XL pb-6 pt-5">
@@ -68,7 +81,7 @@ function App() {
           <Routes>
             <Route path="/artwork" element={<ArtworkPage currentArtwork={currentArtwork} />} />
             <Route path="/" element={<HomePage getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} searchingDisplay={searchingDisplay} metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} momaWorkNoPics={momaWorkNoPics} metWorkNoPics={metWorkNoPics} />} />
-            <Route path="/catalog" element={<PersonalCatalog />} />
+            <Route path="/catalog" element={<PersonalCatalog userReviews={userReviews} setUserReviews={setUserReviews} getUserCatalog={getUserCatalog}/>} />
           </Routes>
         </div>
         </Router>

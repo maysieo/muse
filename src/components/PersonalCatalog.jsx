@@ -1,32 +1,30 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
-const PersonalCatalog = () => {
-  const [userReviews, setUserReviews] = useState([]);
+const PersonalCatalog = ({ userReviews, getUserCatalog }) => {
 
   useEffect(() => {
-    let userEmail = localStorage.getItem('userEmail');
-    axios.get(`http://localhost:3000/review/${userEmail}`)
-      .then((response) => {
-        setUserReviews(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }, []);
+    getUserCatalog();
+  }, [getUserCatalog]);
 
   return (
-    <div>
-    <h2 className="text-custom-yellow">Your Personal Catalog</h2>
+    <div className="text-center text-lg">
+      <h1 className="text-center text-4xl mb-4">Your Personal Catalog</h1>
     <div>
       {userReviews.map((review, index) => {
         return (
-          <div key={index}>
-            <h3>{review.Title}</h3>
-            <h4>{review.Artist}</h4>
-            <p>{review.review}</p>
-            <p>Rating: {review.rating}</p>
-            <img src='https://via.placeholder.com/150' alt={review.Title} />
+          <div key={index} className="flex mb-4">
+            <div className="mr-4">
+              <img src='https://via.placeholder.com/150' alt={review.Title} />
+            </div>
+            <div className="text-left">
+              <h3>Piece: {review.Title}</h3>
+              <h4>Artist: {review.Artist}</h4>
+              <h4>When and where: {review.dateSeen},  {review.Repository}</h4>
+              <p>Your Review: {review.review}</p>
+              <p>Your Rating: {review.rating}</p>
+              {review.isFavorite ? <p>Favorite</p> : null}
+            </div>
           </div>
         )
       })}
