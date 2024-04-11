@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const LoadingImage = () => {
+const LandingPage = () => {
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState('');
   const [index, setIndex] = useState(0);
@@ -37,4 +37,4 @@ const LoadingImage = () => {
   );
 }
 
-export default LoadingImage;
+export default LandingPage;

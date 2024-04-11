@@ -17,7 +17,8 @@ function App() {
   const [momaWork, setMomaWork] = useState([]);
   const [momaWorkNoPics, setMomaWorkNoPics] = useState([]);
   const [whitneyWork, setWhitneyWork] = useState([]);
-  const [searchingDisplay, setSearchingDisplay] = useState(false);
+  const [loadingResults, setLoadingResults] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [artworkPage, setArtworkPage] = useState(false);
   const [currentArtwork, setCurrentArtwork] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,7 +50,8 @@ function App() {
   }
 
   const sendSearchValue = () => {
-    setSearchingDisplay(true);
+    setLoadingResults(true);
+    setSearching(true)
     axios.get('http://localhost:3000/artist', {
       params: {
         name: searchArtist
@@ -62,9 +64,11 @@ function App() {
       setMomaWork(response.data.filter((art) => art.Repository === 'Museum of Modern Art' && art.ImageURL));
       setMomaWorkNoPics(response.data.filter((art) => art.Repository === 'Museum of Modern Art' && !art.ImageURL));
       setWhitneyWork(response.data.filter((art) => art.Repository === 'Whitney Museum of American Art'));
+      setLoadingResults(false);
     })
     .catch((error) => {
       console.log(error);
+      setLoadingResults(false);
     })
   }
 
@@ -82,7 +86,7 @@ function App() {
         </Link>
           <Routes>
             <Route path="/artwork" element={<ArtworkPage currentArtwork={currentArtwork} />} />
-            <Route path="/" element={<HomePage getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} searchingDisplay={searchingDisplay} metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} momaWorkNoPics={momaWorkNoPics} metWorkNoPics={metWorkNoPics} />} />
+            <Route path="/" element={<HomePage getSearchValue={getSearchValue} sendSearchValue={sendSearchValue} searchArtist={searchArtist} metWork={metWork} momaWork={momaWork} whitneyWork={whitneyWork} getCurrentArtwork={getCurrentArtwork} momaWorkNoPics={momaWorkNoPics} metWorkNoPics={metWorkNoPics} loadingResults={loadingResults} searching={searching}/>} />
             <Route path="/catalog" element={<PersonalCatalog userReviews={userReviews} setUserReviews={setUserReviews} getUserCatalog={getUserCatalog}/>} />
           </Routes>
         </div>
