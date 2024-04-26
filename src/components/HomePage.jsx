@@ -2,7 +2,6 @@
 import Search from './Search';
 import MuseumList from './MuseumList';
 import LandingPage from './LandingPage';
-import museLogo from '../assets/images/museLogo.png';
 
 const HomePage = ({ getSearchValue, sendSearchValue, searchArtist, loadingResults, metWork, metWorkNoPics, momaWork, momaWorkNoPics, whitneyWork, getCurrentArtwork, searching }) => {
 

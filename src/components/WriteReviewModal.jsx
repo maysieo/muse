@@ -1,10 +1,21 @@
 /* eslint-disable react/prop-types */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
 const WriteReviewModal = ({ closeModal, getUserReviews, currentArtwork }) => {
   const formRef = useRef();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [artworkTitle, setArtworkTitle] = useState('');
+  const [artworkArtist, setArtworkArtist] = useState('');
+  const [artworkLocation, setArtworkLocation] = useState('');
+
+  useEffect(() => {
+    if (currentArtwork) {
+      setArtworkTitle(currentArtwork.Title);
+      setArtworkArtist(currentArtwork.Artist);
+      setArtworkLocation(currentArtwork.Repository);
+    }
+  }, [currentArtwork]);
 
   const handleFavoriteClick = (e) => {
     e.preventDefault();
@@ -45,10 +56,10 @@ const WriteReviewModal = ({ closeModal, getUserReviews, currentArtwork }) => {
       <div className="bg-white p-6 rounded-lg w-4/5 md:w-1/2 flex flex-col">
         <span className="text-custom-red text-3xl px-4 self-end" onClick={closeModal}>&times;</span>
         <h2 className="text-2xl mb-4">Write a review</h2>
-        <input className="border p-2 mb-4 w-1/2 float-left" type="text" placeholder="Title" name="Title" />
-        <input className="border p-2 mb-4 w-1/2 float-left" type="text" placeholder="Artist" name="Artist" />
+        <input className="border p-2 mb-4 w-1/2 float-left" type="text" placeholder="Title" name="Title" value={artworkTitle} onChange={e => setArtworkTitle(e.target.value)} />
+        <input className="border p-2 mb-4 w-1/2 float-left" type="text" placeholder="Artist" name="Artist" value={artworkArtist} onChange={e => setArtworkArtist(e.target.value)} />
         <div className="flex">
-          <input className="border p-2 mb-4 w-1/2 float-left mr-2" type="text" placeholder="Museum or Gallery" name="Repository" />
+          <input className="border p-2 mb-4 w-1/2 float-left mr-2" type="text" placeholder="Museum or Gallery" name="Repository" value={artworkLocation} onChange={e => setArtworkLocation(e.target.value)} />
           <input className="border p-2 mb-4 w-1/4 float-left ml-2 mr-2" type="text" placeholder="City" name="city" />
           <input className="border p-2 mb-4 w-1/4 ml-2" type="date" name="dateSeen"/>
         </div>
