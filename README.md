@@ -1,8 +1,16 @@
-# React + Vite
+# Muse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Current Roadmap
+- Auto-fill form for currently selected artwork
+- User can upload photos to review, display user photos
+- Build out readMe
+- Deploy
+- Upgrade user authentication
+- Filter and sort for museum pieces
+- Favorite artists
+- Build want to see list
+- Build itinerary list
+- Build social features
+- Build recommendation engine
+- Most popular works in this radius, popular exhibits right now
+- Mobile version
